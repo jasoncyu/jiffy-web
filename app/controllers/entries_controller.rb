@@ -1,3 +1,5 @@
+require 'csv'
+
 class EntriesController < ApplicationController
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
 
@@ -71,4 +73,5 @@ class EntriesController < ApplicationController
     def entry_params
       params[:entry]
     end
+
 end
