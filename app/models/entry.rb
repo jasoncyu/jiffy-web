@@ -1,6 +1,7 @@
 # 2013.csv has all the 2013 records
 # jiffy.csv has the latest records
 class Entry < ActiveRecord::Base
+  include Comparable
   belongs_to :project
   belongs_to :task
   dir_name = '/Users/yujason2/Dropbox/Apps/JiffyBackup/2013.csv'
@@ -46,5 +47,4 @@ class Entry < ActiveRecord::Base
       entry.save!
     end
   end
-
 end

@@ -6,9 +6,12 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= yield %>
-
-</body>
+<div class="container">
+    <body data-controller="<%= controller.controller_name %>"
+      data-action="<%= controller.action_name %>" >
+    
+    <%= yield %>
+    
+    </body>
+</div>
 </html>

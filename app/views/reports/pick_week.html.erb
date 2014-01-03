@@ -1,0 +1,7 @@
+<h3>What week's report do you want?</h3>
+<select name="" id="report_week_select">
+    <% @monday_strings.each do |monday| %>
+        <option value=""><%= monday %></option>
+    <% end %>
+</select>
+<button id="report_week_go" class='btn btn-large'>Go!</button>

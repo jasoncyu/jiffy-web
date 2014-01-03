@@ -1,7 +1,6 @@
 <%= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/highcharts/3.0.7/highcharts.js", "chartkick" %>
-<h1>Report</h1>
-
-<div class="center">
-    <h3>Overview</h3>
-</div>
+<h3>Report by Week</h3>
 <%= pie_chart @name_hours %>
+<%= column_chart @name_hours %>
+
+
