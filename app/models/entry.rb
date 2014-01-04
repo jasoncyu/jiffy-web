@@ -24,27 +24,30 @@ class Entry < ActiveRecord::Base
 
       project_name, task_name, start_time, stop_time, duration_in_minutes, note = row.values_at(1,2,3,4,5,6)
 
+      entry = Entry.new
+
       project = Project.find_by_name(project_name) 
       if !project
         project = Project.create(name: project_name)
       end
+      entry.project_id = project.id
 
-      task = Task.find_by_name(task_name) 
-      if !task
-        task = Task.create(name: task_name)
-        project.tasks << task
+      if task_name
+        task = Task.find_by_name(task_name) 
+        if !task
+          task = Task.create(name: task_name)
+          project.tasks << task
+        end
+      entry.task_id = task.id
       end
 
       date_format = '%Y-%m-%d %H:%M:%S'
       potential_start_time = DateTime.strptime(start_time, date_format)
 
-      entry = Entry.new
       entry.start_time = DateTime.strptime(start_time, date_format)
       entry.stop_time = DateTime.strptime(stop_time, date_format)
       entry.hours = duration_in_minutes.to_i.div(60)
       entry.minutes = duration_in_minutes.to_i % 60
-      entry.task_id = task.id
-      entry.project_id = project.id
 
       entry.save!
     end

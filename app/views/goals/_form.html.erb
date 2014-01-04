@@ -17,7 +17,7 @@
   <%= select_tag(:task_id, options_for_select(@tasks.map {|task| [task.name, task.id]}), id: 'task') %>
 
   <%= select_tag(:goal_type, options_for_select([['Negative', -1], ['Positive', 1]])) %>
-  <%= f.text_field :amount %>
+  <%= text_field :goal, :amount %>
   <div class="actions">
     <%= f.submit %>
   </div>

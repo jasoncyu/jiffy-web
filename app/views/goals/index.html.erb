@@ -16,8 +16,8 @@
     <% @goals.each do |goal| %>
       <tr>
         <td><%= goal.amount %></td>
-        <td><%= goal.type %></td>
-        <td><%= goal.task %></td>
+        <td><%= goal.goal_type_string %></td>
+        <td><%= goal.owner_name %></td>
         <td><%= link_to 'Show', goal_path(goal.id) %></td>
         <td><%= link_to 'Edit', edit_goal_path(goal.id) %></td>
         <td><%= link_to 'Destroy', goal_path(goal), method: :delete, data: { confirm: 'Are you sure?' } %></td>
