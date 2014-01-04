@@ -21,6 +21,7 @@ class ReportsController < ApplicationController
     Task.all.destroy_all
     Entry.all.destroy_all
     Project.all.destroy_all
+    Goal.all.destroy_all
 
     data_sources = ['/Users/yujason2/Dropbox/Apps/JiffyBackup/2013.csv',
                     '/Users/yujason2/Dropbox/Apps/JiffyBackup/jiffy.csv']
