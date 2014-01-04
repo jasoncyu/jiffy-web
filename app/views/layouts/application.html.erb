@@ -6,17 +6,11 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<div class="container">
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#">Reports</a></li>
-      <li><%= link_to 'Goals', new_goal_path %></li>
-    </ul>
+<body data-controller="<%= controller.controller_name %>" data-action="<%= controller.action_name %>" >
+  <%= render 'layouts/nav' %>
 
-    <body data-controller="<%= controller.controller_name %>"
-      data-action="<%= controller.action_name %>" >
-    
+  <div class="container">
     <%= yield %>
-    
-    </body>
-</div>
+  </div>
+</body>
 </html>
