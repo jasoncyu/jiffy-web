@@ -32,6 +32,7 @@ class Entry < ActiveRecord::Base
       task = Task.find_by_name(task_name) 
       if !task
         task = Task.create(name: task_name)
+        project.tasks << task
       end
 
       date_format = '%Y-%m-%d %H:%M:%S'

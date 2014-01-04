@@ -13,6 +13,7 @@ JiffyAnalysisRails::Application.routes.draw do
 
   get 'project/:id' => 'reports#project'
   get 'project/:id/week/:week' => 'reports#project'
+  get 'project/:id/tasks' => 'projects#tasks'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

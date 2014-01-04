@@ -1,3 +1,4 @@
+<%= javascript_include_tag params[:controller] %>
 <%= form_for(@goal) do |f| %>
   <% if @goal.errors.any? %>
     <div id="error_explanation">
@@ -11,10 +12,11 @@
     </div>
   <% end %>
   
-  <%= radio_button_tag(:goal_type, '-1') %>
-  <%= label_tag(:type_negative, "Negative") %>
-  <%= radio_button_tag(:type, '1') %>
-  <%= label_tag(:type_positive, "Positive") %>
+  <%= select_tag(:goal_owner, options_for_select([["Task", "task"], ["Project", "project"]]), id: 'goal_owner') %>
+  <%= select_tag(:project_id, options_for_select(@projects.map {|project| [project.name, project.id]}), id: 'project') %>
+  <%= select_tag(:task_id, options_for_select(@tasks.map {|task| [task.name, task.id]}), id: 'task') %>
+
+  <%= select_tag(:goal_type, options_for_select([['Negative', -1], ['Positive', 1]])) %>
   <%= f.text_field :amount %>
   <div class="actions">
     <%= f.submit %>

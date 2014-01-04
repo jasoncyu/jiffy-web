@@ -1,6 +1,13 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
+  def tasks
+    project = Project.find(params[:id])
+    respond_to do |format|
+      format.json { render json:project.tasks }
+    end
+  end
+  
   # GET /projects
   # GET /projects.json
   def index
