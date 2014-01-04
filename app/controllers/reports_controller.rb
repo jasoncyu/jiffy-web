@@ -5,16 +5,34 @@ class ReportsController < ApplicationController
 
   def pick_week
     mondays = cutoffs()
-    @monday_strings = mondays.map {|monday| monday.strftime('%A, %B %e, %Y')}
+    @monday_strings = mondays.map {|monday| stringify_date monday}
   end
 
   def report_week
     week_index = params[:week].to_i
+
     mondays = cutoffs()
+    @start_day = stringify_date mondays[week_index]
+    @end_day = stringify_date (mondays[week_index] + 6.days)
     @name_hours = name_duration mondays[week_index]
   end
 
+  def refresh
+    Task.all.destroy_all
+    Entry.all.destroy_all
+    Project.all.destroy_all
+
+    data_sources = ['/Users/yujason2/Dropbox/Apps/JiffyBackup/2013.csv',
+                    '/Users/yujason2/Dropbox/Apps/JiffyBackup/jiffy.csv']
+    data_sources.each { |source| Entry.parse_entries source }
+
+    redirect_to action: :index, notice: "Successfully refreshed data!"
+  end
+
   private
+  def stringify_date(date)
+    date.strftime('%A, %B %e, %Y')
+  end
   # list of date objects that are cutoff points for a week's worth of data.
   # I chose monday
   def cutoffs

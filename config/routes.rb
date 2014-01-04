@@ -13,6 +13,7 @@ JiffyAnalysisRails::Application.routes.draw do
   get 'reports' => 'reports#index'
   get 'reports/week' => 'reports#pick_week'
   get 'reports/week/:week' => 'reports#report_week'
+  post 'reports/refresh' => 'reports#refresh'
 
   get 'project/:id' => 'reports#project'
   get 'project/:id/week/:week' => 'reports#project'

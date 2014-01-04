@@ -1,3 +1,4 @@
+require 'csv'
 # 2013.csv has all the 2013 records
 # jiffy.csv has the latest records
 class Entry < ActiveRecord::Base
