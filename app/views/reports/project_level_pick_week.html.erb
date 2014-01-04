@@ -1,0 +1,7 @@
+<%= javascript_include_tag params[:controller] %>
+<h3>Project-level report</h3>
+<%= select_tag(:week, options_for_select(@monday_strings.each_with_index.map{ |mon, i| [mon, i] }), 
+id: :week_select) %>
+<%= select_tag(:project_id, options_for_select(@projects.map{ |p| [p.name, p.id] }), id: :project_select) %>
+
+<button id="project_level_report_week_go" class='btn btn-large'>Go!</button>

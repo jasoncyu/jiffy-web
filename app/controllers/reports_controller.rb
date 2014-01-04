@@ -1,8 +1,9 @@
 class ReportsController < ApplicationController
   def index
-    @name_hours = name_duration()
+    @name_hours = project_duration()
   end
 
+  #Overall reporting
   def pick_week
     mondays = cutoffs()
     @monday_strings = mondays.map {|monday| stringify_date monday}
@@ -14,8 +15,26 @@ class ReportsController < ApplicationController
     mondays = cutoffs()
     @start_day = stringify_date mondays[week_index]
     @end_day = stringify_date (mondays[week_index] + 6.days)
-    @name_hours = name_duration mondays[week_index]
+    @name_hours = project_duration mondays[week_index]
   end
+
+  #Project-level reports
+  def project_level_pick_week
+    mondays = cutoffs()
+    @monday_strings = mondays.map {|monday| stringify_date monday}
+    @projects = Project.all
+  end
+
+  def report_project_week
+    week_index = params[:week].to_i
+
+    @project = Project.find(params[:id])
+    mondays = cutoffs()
+    @start_day = stringify_date mondays[week_index]
+    @end_day = stringify_date (mondays[week_index] + 6.days)
+    @name_hours = task_duration(@project, mondays[week_index])
+  end
+
 
   def refresh
     Task.all.destroy_all
@@ -53,7 +72,7 @@ class ReportsController < ApplicationController
 
   # calculates a list of hashes with {project_name: duration} for the
   # given week. If no day_of_week is passed, then it's calculated for all data.
-  def name_duration(day_of_week=nil)
+  def project_duration(day_of_week=nil)
     # hash of project_name to hours spent
     project_names = Project.all.map(&:name)
     name_hours = {}
@@ -78,4 +97,31 @@ class ReportsController < ApplicationController
 
     return name_hours
   end
+
+  def task_duration(project, day_of_week)
+    task_names = project.tasks.map(&:name)
+    task_hours = {no_task: 0}
+    task_names.each do |name|
+      task_hours[name] = 0
+    end
+
+    entries = Entry.where("start_time > ? AND stop_time < ?", day_of_week, day_of_week + 7.days)
+    entries = Entry.where(project_id: project.id)
+
+    entries.each do |entry|
+      if entry.task
+        task_hours[entry.task.name] += entry.duration
+      else
+        task_hours[:no_task] += entry.duration
+      end
+    end
+
+    # Round to nearest hundredth
+    task_hours.each do |name, hours|
+      task_hours[name] = (hours*100).round/100.0
+    end
+
+    task_hours
+  end
+
 end
