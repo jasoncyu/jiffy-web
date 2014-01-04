@@ -26,7 +26,7 @@ class ReportsController < ApplicationController
                     '/Users/yujason2/Dropbox/Apps/JiffyBackup/jiffy.csv']
     data_sources.each { |source| Entry.parse_entries source }
 
-    redirect_to action: :index, notice: "Successfully refreshed data!"
+    redirect_to action: :index
   end
 
   private
@@ -42,7 +42,7 @@ class ReportsController < ApplicationController
 
     cutoff = first_cutoff
     cutoffs = []
-    while cutoff < last_cutoff
+    while cutoff <= last_cutoff
       cutoffs << cutoff.dup
       cutoff += 1.week
     end
