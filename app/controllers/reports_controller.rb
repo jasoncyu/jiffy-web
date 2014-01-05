@@ -16,6 +16,8 @@ class ReportsController < ApplicationController
     @start_day = stringify_date mondays[week_index]
     @end_day = stringify_date (mondays[week_index] + 6.days)
     @name_hours = project_duration week_index
+
+    gon.asdf = 'jason'
   end
 
   #Project-level reports

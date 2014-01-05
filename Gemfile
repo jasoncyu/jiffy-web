@@ -47,3 +47,4 @@ end
 gem "chartkick"
 gem "twitter-bootstrap-rails"
 gem 'highcharts-rails'
+gem 'gon'

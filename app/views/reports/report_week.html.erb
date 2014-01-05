@@ -1,4 +1,5 @@
 <%= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/highcharts/3.0.7/highcharts.js", "chartkick" %>
+<% javascript 'jason.js' %>
 <h3>Report from <%= @start_day %> to <%= @end_day %></h3>
 <%= pie_chart @name_hours %>
 <%= column_chart @name_hours %>

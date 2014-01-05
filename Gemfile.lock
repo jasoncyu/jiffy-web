@@ -38,6 +38,9 @@ GEM
     coffee-script-source (1.6.3)
     erubis (2.7.0)
     execjs (2.0.2)
+    gon (5.0.1)
+      actionpack (>= 2.3.0)
+      json
     highcharts-rails (3.0.7)
       railties (>= 3.1)
     hike (1.2.3)
@@ -118,6 +121,7 @@ PLATFORMS
 DEPENDENCIES
   chartkick
   coffee-rails (~> 4.0.0)
+  gon
   highcharts-rails
   jbuilder (~> 1.2)
   jquery-rails
