@@ -8,9 +8,7 @@ JiffyAnalysisRails::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'weeks#index'
 
-  get 'project/:id' => 'reports#project'
-  get 'project/:id/week/:week' => 'reports#project'
-  get 'project/:id/tasks' => 'projects#tasks'
+  post 'weeks/update_data' => 'weeks#update_data'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
