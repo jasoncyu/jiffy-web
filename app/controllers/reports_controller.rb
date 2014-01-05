@@ -15,7 +15,7 @@ class ReportsController < ApplicationController
     mondays = cutoffs()
     @start_day = stringify_date mondays[week_index]
     @end_day = stringify_date (mondays[week_index] + 6.days)
-    @name_hours = project_duration mondays[week_index]
+    @name_hours = project_duration week_index
   end
 
   #Project-level reports
@@ -72,14 +72,15 @@ class ReportsController < ApplicationController
 
   # calculates a list of hashes with {project_name: duration} for the
   # given week. If no day_of_week is passed, then it's calculated for all data.
-  def project_duration(day_of_week=nil)
+  def project_duration(week=nil)
     # hash of project_name to hours spent
     project_names = Project.all.map(&:name)
     name_hours = {}
     project_names.each do |name|
       name_hours[name] = 0
     end
-    if day_of_week
+    if week
+      day_of_week = cutoffs()[week]
       entries = Entry.where("start_time > ? AND stop_time < ?", day_of_week, day_of_week + 7.days)
     else
       entries = Entry.all 
@@ -98,7 +99,8 @@ class ReportsController < ApplicationController
     return name_hours
   end
 
-  def task_duration(project, day_of_week)
+  def task_duration(project, week)
+    day_of_week = cutoffs()[week]
     task_names = project.tasks.map(&:name)
     task_hours = {no_task: 0}
     task_names.each do |name|
