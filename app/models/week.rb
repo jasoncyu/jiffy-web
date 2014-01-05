@@ -13,7 +13,7 @@ class Week < ActiveRecord::Base
 
     # Round to nearest hundredth
     h.each do |name, hours|
-      h[name] = (hours*100).round/100.0
+      h[name] = hours.round(2)
     end
 
     return h
@@ -29,6 +29,11 @@ class Week < ActiveRecord::Base
 
     entries.each do |entry|
       h[entry.task.name] += entry.duration if entry.task
+    end
+
+    # Round to nearest hundredth
+    h.each do |name, hours|
+      h[name] = hours.round(2)
     end
 
     return h
