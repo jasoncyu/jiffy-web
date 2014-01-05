@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140104025046) do
+ActiveRecord::Schema.define(version: 20140105071338) do
 
   create_table "entries", force: true do |t|
     t.integer  "project_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140104025046) do
     t.string   "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "week_id"
   end
 
   create_table "goals", force: true do |t|
@@ -45,6 +46,12 @@ ActiveRecord::Schema.define(version: 20140104025046) do
   create_table "tasks", force: true do |t|
     t.string   "name"
     t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "weeks", force: true do |t|
+    t.date     "start_day"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

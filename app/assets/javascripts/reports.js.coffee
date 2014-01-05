@@ -8,18 +8,3 @@ $(document).ready ->
         week = $("#week_select option:selected").val()
         document.location.href = document.location.origin + '/reports/project/' + project_id + '/week/' + week
 
-    $("#goalActualBarChart").highcharts
-        chart: 
-            type: 'bar'
-        title:
-            text: "Goal vs Actual"
-        xAxis:
-            categories: ['Apples', 'Bananas', 'Oranges']
-        yAxis:
-            title:
-                text: 'Hours'
-        series:
-            [
-                name:'School'
-                data:[5,7,3]
-            ]
