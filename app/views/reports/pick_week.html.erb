@@ -1,9 +1,0 @@
-<h3>What week's report do you want?</h3>
-<ul>
-<% @monday_strings.each_with_index do |monday, i| %>
-    <li><%= link_to monday, action: :report_week, week: i %></li>
-<% end %>
-</ul>
-
-
-<button id="report_week_go" class='btn btn-large'>Go!</button>

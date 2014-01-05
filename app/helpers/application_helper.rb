@@ -43,4 +43,18 @@ module ApplicationHelper
       entry.save!
     end
   end
+
+  def refresh
+    Task.all.destroy_all
+    Entry.all.destroy_all
+    Project.all.destroy_all
+    Goal.all.destroy_all
+
+    data_sources = ['/Users/yujason2/Dropbox/Apps/JiffyBackup/2013.csv',
+                    '/Users/yujason2/Dropbox/Apps/JiffyBackup/jiffy.csv']
+    data_sources.each { |source| Entry.parse_entries source }
+
+    redirect_to action: :index
+  end
+  
 end

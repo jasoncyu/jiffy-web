@@ -1,7 +1,7 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-$(document).ready ->
+ready = ->
     $("#projectBarChart").highcharts
         chart: 
             type: 'bar'
@@ -18,3 +18,6 @@ $(document).ready ->
                 {name: 'Positive', data: gon.pos_goal_data}
                 {name: 'Negative', data: gon.neg_goal_data}
             ]
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

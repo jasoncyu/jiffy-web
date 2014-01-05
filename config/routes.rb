@@ -6,13 +6,7 @@ JiffyAnalysisRails::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'reports#index'
-  get 'reports' => 'reports#index'
-  get 'reports/week' => 'reports#pick_week'
-  get 'reports/week/:week' => 'reports#report_week'
-  get 'reports/project/:id/week' => 'reports#project_level_pick_week'
-  get 'reports/project/:id/week/:week' => 'reports#report_project_week'
-  post 'reports/refresh' => 'reports#refresh'
+  root 'weeks#index'
 
   get 'project/:id' => 'reports#project'
   get 'project/:id/week/:week' => 'reports#project'
