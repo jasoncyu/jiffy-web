@@ -40,7 +40,7 @@ module ApplicationHelper
       entry.hours = duration_in_minutes.to_i.div(60)
       entry.minutes = duration_in_minutes.to_i % 60
 
-      entry.save!
+      entry.save
     end
   end
 

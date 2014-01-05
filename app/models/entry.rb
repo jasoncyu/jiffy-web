@@ -5,6 +5,7 @@ class Entry < ActiveRecord::Base
   include Comparable
 
   validates :start_time, uniqueness: true
+  validates :stop_time, uniqueness: true
   belongs_to :project
   belongs_to :task
   belongs_to :week

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'application_helper'
 
 describe Entry do
   before do
@@ -15,5 +16,4 @@ describe Entry do
 
     it {should_not be_valid}
   end
-
 end
