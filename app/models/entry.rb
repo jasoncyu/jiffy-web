@@ -4,8 +4,8 @@ require 'csv'
 class Entry < ActiveRecord::Base
   include Comparable
 
-  validates :start_time, uniqueness: true
-  validates :stop_time, uniqueness: true
+  validates :start_time, uniqueness: true, presence: true
+  validates :stop_time, uniqueness: true, presence: true
   belongs_to :project
   belongs_to :task
   belongs_to :week

@@ -27,6 +27,16 @@ describe ApplicationHelper do
 
       expect(old_count).to eq(new_count)
     end
+
+    it "shouldn't create duplicate weeks" do
+      helper.parse_entries '/Users/yujason2/Dropbox/Apps/JiffyBackup/jiffy.csv'
+      Week.create_weeks
+      old_week_count = Week.count
+      Week.create_weeks
+      new_week_count = Week.count
+
+      expect(old_week_count).to eq(new_week_count)
+    end
   end
 
 end

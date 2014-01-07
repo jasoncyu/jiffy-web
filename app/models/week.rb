@@ -1,5 +1,6 @@
 class Week < ActiveRecord::Base
   has_many :entries
+  validates :start_day, uniqueness: true, presence: true
 
   # calculates a list of hashes with {project_name: duration} for this week's entries
   def project_data

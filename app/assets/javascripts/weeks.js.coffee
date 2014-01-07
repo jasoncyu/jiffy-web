@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 ready = ->
+    console.log "page:load"
     $("#projectBarChart").highcharts
         chart: 
             type: 'bar'
@@ -18,6 +19,5 @@ ready = ->
                 {name: 'Positive', data: gon.pos_goal_data}
                 {name: 'Negative', data: gon.neg_goal_data}
             ]
-
-$(document).ready(ready)
+# $(document).ready(ready)
 $(document).on('page:load', ready)
