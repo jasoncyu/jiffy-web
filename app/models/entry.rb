@@ -15,8 +15,19 @@ class Entry < ActiveRecord::Base
   def duration
     hours + minutes.to_f/60
   end
+
+  # pretty prints either start time or stop time
+  def pretty(key)
+    self.send(key.to_sym).strftime("%m-%d-%Y %k:%M")
+  end
   
   def self.parse_entries(file_name)
 
   end
+
+  #returns duplicates if there are any, else empty
+  def self.dup_entries
+    Entry.all.select {|e| !e.valid?}
+  end
+
 end

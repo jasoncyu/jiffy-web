@@ -2,6 +2,11 @@ class Week < ActiveRecord::Base
   has_many :entries
   validates :start_day, uniqueness: true, presence: true
 
+  def data_by_day
+    data_by_day = self.entries.group_by {|e| e.start_time.to_date}
+    return self.entries.count
+  end
+
   # calculates a list of hashes with {project_name: duration} for this week's entries
   def project_data
     # hash of project_name to hours spent

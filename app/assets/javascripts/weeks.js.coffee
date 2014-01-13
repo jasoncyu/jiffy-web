@@ -19,5 +19,7 @@ ready = ->
                 {name: 'Positive', data: gon.pos_goal_data}
                 {name: 'Negative', data: gon.neg_goal_data}
             ]
-# $(document).ready(ready)
+# on refresh
+$(document).ready(ready)
+# on turbolinks load
 $(document).on('page:load', ready)
