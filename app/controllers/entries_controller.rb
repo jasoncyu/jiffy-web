@@ -11,6 +11,8 @@ class EntriesController < ApplicationController
       week = Week.find(params[:week_id])
       @data_by_day = week.entries.group_by {|e| e.start_time.to_date}
     end
+
+    @date_format = "%m-%d-%Y"
   end
 
   # GET /entries/1

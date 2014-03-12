@@ -1,7 +1,7 @@
 <h1>Listing entries</h1>
 <% @data_by_day.each do |day, data| %>
-  <h5><%= Date::DAYNAMES[day.wday] %></h5>
-<table>
+  <h5><%= "#{Date::DAYNAMES[day.wday]}, #{day.strftime(@date_format)}" %></h5>
+<table class="table">
   <thead>
     <tr>
       <th>Start</th>
@@ -12,7 +12,7 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="table-striped table-hover">
       <% data.each do |entry| %>
         <tr>
           <td><%= entry.pretty :start_time %></td>

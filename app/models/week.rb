@@ -2,6 +2,7 @@ class Week < ActiveRecord::Base
   has_many :entries
   validates :start_day, uniqueness: true, presence: true
 
+  # hash of {date => entries}
   def data_by_day
     data_by_day = self.entries.group_by {|e| e.start_time.to_date}
     return self.entries.count
