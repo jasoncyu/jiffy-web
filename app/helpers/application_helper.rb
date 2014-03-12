@@ -1,4 +1,6 @@
+require 'csv'
 module ApplicationHelper
+  DATA_PATH = '/Users/yujason2/Projects/rails_projects/jiffy_analysis_rails/data/'
   def javascript(*files)
     content_for(:head) { javascript_include_tag(*files) }
   end
@@ -42,6 +44,8 @@ module ApplicationHelper
 
       entry.save
     end
+
+    Week.create_weeks
   end
 
   def refresh
@@ -50,8 +54,8 @@ module ApplicationHelper
     Project.all.destroy_all
     Goal.all.destroy_all
 
-    data_sources = ['/Users/yujason2/Dropbox/Apps/JiffyBackup/2013.csv',
-                    '/Users/yujason2/Dropbox/Apps/JiffyBackup/jiffy.csv']
+    data_sources = [DATA_PATH + '2013.csv',
+                    DATA_PATH + 'jiffy.csv']
     data_sources.each { |source| Entry.parse_entries source }
 
     redirect_to action: :index

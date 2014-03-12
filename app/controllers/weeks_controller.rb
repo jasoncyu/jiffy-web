@@ -14,7 +14,7 @@ class WeeksController < ApplicationController
   end
 
   def update_data
-    parse_entries('/Users/yujason2/Dropbox/Apps/JiffyBackup/jiffy.csv')
+    parse_entries(ApplicationHelper::DATA_PATH + 'jiffy.csv')
     redirect_to weeks_path, notice: "Data updated"
   end
 end
