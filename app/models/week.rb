@@ -48,9 +48,11 @@ class Week < ActiveRecord::Base
 
   def self.create_weeks
     entries = Entry.all.order('start_time ASC')
-    mondays.each do |monday|
+    self.mondays.each do |monday|
       entries = Entry.where("start_time > ? AND stop_time < ?", monday, monday + 7.days)
-      Week.create(start_day: monday, entries: entries)
+      w = Week.find_or_create_by(start_day: monday)
+      w.entries = entries
+      w.save
     end
   end
 

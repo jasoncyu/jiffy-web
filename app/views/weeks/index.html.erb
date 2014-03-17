@@ -5,5 +5,5 @@
     <% @weeks.each do |week| %>
         <li><%= link_to week.start_day, week_path(week) %></li>
     <% end %>
-    <%= button_to 'Update data', action: 'update_data' %>
+    <%= button_to 'Refresh data', action: 'refresh_all_data' %>
 </ul>

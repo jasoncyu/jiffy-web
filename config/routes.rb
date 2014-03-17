@@ -11,6 +11,7 @@ JiffyAnalysisRails::Application.routes.draw do
   root 'weeks#index'
 
   post 'weeks/update_data' => 'weeks#update_data'
+  post 'weeks/refresh_all_data' => 'weeks#refresh_all_data'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
