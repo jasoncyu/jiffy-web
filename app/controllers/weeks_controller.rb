@@ -17,7 +17,8 @@ class WeeksController < ApplicationController
     delete_current_data!
     read_new_data
 
-    redirect_to weeks_path, notice: "Data updated"
+    # redirect_to weeks_path, notice: "Data updated"
+    render nothing: true
   end
 
   def delete_current_data!

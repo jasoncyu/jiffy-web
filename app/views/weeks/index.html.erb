@@ -1,3 +1,4 @@
+<%= javascript 'weeks_index.js' %>
 <p id="notice"><%= notice %></p>
 <h3>Weeks</h3>
 
@@ -5,5 +6,26 @@
     <% @weeks.each do |week| %>
         <li><%= link_to week.start_day, week_path(week) %></li>
     <% end %>
-    <%= button_to 'Refresh data', action: 'refresh_all_data' %>
 </ul>
+
+<button class="btn btn-primary" id="refresh-data">
+   Refresh Data 
+</button>
+
+<!-- Small modal -->
+<div class="modal fade loading-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Refresh Data</h4>
+        </div>
+        <div class="modal-body">
+          <p>Please wait...</p>
+        </div>
+        <div class="modal-footer" aria-hidden="true">
+          <button type="button" class="btn btn-default modal-close" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+  </div>
+</div>

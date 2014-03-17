@@ -1,6 +1,7 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
 ready = ->
     console.log "page:load"
     $("#projectBarChart").highcharts
@@ -19,6 +20,7 @@ ready = ->
                 {name: 'Positive', data: gon.pos_goal_data}
                 {name: 'Negative', data: gon.neg_goal_data}
             ]
+
 # on refresh
 $(document).ready(ready)
 # on turbolinks load
