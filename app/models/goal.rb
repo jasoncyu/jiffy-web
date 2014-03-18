@@ -12,5 +12,10 @@ class Goal < ActiveRecord::Base
   end
 
   def owner_name
+    if @goal_type == 'ProjectGoal'
+      @project
+    elsif @goal_type == 'TaskGoal'
+      @task
+    end
   end
 end
