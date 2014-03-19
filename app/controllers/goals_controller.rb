@@ -16,7 +16,7 @@ class GoalsController < ApplicationController
   def new
     @goal = Goal.new
     @projects = Project.all
-    @tasks = @projects.first.tasks
+    @tasks = Task.all
   end
 
   # GET /goals/1/edit
@@ -27,20 +27,21 @@ class GoalsController < ApplicationController
   # POST /goals.json
   def create
     logger.debug "params: #{params.inspect}"
+    @goal = nil
     if params[:goal_owner] == "project"
       @goal = ProjectGoal.new
-      @goal.amount = params[:goal][:amount].to_i
-      @goal.goal_type = params[:goal_type].to_i
-      project = Project.find(params[:project_id])
-      project.goal = @goal
+      @goal.goal_type = "ProjectGoal"
+      owner = Project.find(params[:project_id])
     else
       @goal = TaskGoal.new
-      @goal.amount = params[:goal][:amount].to_i
-      @goal.goal_type = params[:goal_type].to_i
-      task = Task.find(params[:task_id])
-      task.goal = @goal 
+      @goal.goal_type = 'TaskGoal'
+      owner = Task.find(params[:task_id])
     end
 
+    @goal.amount = params[:goal][:amount].to_i
+    owner.goal = @goal 
+    @goal.owner = owner
+    @goal.owner_name = owner.name
 
     respond_to do |format|
       if @goal.save
@@ -75,6 +76,11 @@ class GoalsController < ApplicationController
       format.html { redirect_to goals_url }
       format.json { head :no_content }
     end
+  end
+
+  def relink
+    @goals = Goal.all
+    @projects = Project.all
   end
 
   private

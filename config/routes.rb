@@ -1,5 +1,9 @@
 JiffyAnalysisRails::Application.routes.draw do
-  resources :goals
+  resources :goals do
+    collection do
+      get 'relink'
+    end
+  end
   resources :weeks do
     resources :entries
   end

@@ -1,7 +1,11 @@
 class TaskGoal < Goal
   belongs_to :task
 
-  def owner_name
-    Task.find(self.task_id).name 
+  def owner
+    @task
+  end
+
+  def owner=(owner)
+    @task = owner
   end
 end
