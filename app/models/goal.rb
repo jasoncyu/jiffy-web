@@ -1,4 +1,7 @@
 class Goal < ActiveRecord::Base
+  PROJECT_TYPE = 0
+  TASK_TYPE = 1
+
   def goal_type_string
     self.is_positive? ? "Positive" : "Negative"
   end
@@ -10,4 +13,6 @@ class Goal < ActiveRecord::Base
   def is_negative?
     self.goal_type < 0
   end
+
+  
 end

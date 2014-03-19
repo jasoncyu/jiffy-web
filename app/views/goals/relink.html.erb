@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-md-6">
+        <h3>Goals</h3>
+        <% @goals.each do |goal| %>
+            <div class="goal">
+                <%= goal.owner_name %>
+                <%= goal.goal_type_string %>
+                <%= goal.amount %>
+            </div>
+        <% end %>
+    </div>
+    
+    <div class="col-md-6">
+        <h3>Project/tasks</h3>
+        <!-- Highlight with goal in green, without in red -->
+        <% @projects.each do |project| %>
+            <div class="trackable">
+                <%= project.name %>
+                <% if project.goal %>
+                    <%= project.goal.owner_name %>
+                <% end %>
+            </div>
+            <% project.tasks.each do |task| %>
+                <div class="trackable">
+                    <%= task.name %>
+                    <% if task.goal %>
+                        <%= task.goal.owner_name %>
+                    <% end %>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+</div>
