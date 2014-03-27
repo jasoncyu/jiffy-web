@@ -1,6 +1,5 @@
 <%= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/highcharts/3.0.7/highcharts.js", "chartkick" %>
 <%= include_gon %>
-<%= javascript 'week_show.js' %>
 <h3><%= @week.start_day %></h3>
 <h4><%= link_to 'Entries', week_entries_path(@week.id) %></h4>
 <%= pie_chart @week.project_data %>

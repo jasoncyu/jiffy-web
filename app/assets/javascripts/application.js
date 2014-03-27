@@ -16,3 +16,5 @@
 //= require chartkick
 //= require twitter/bootstrap
 //= require turbolinks
+//= require jquery-readyselector
+//= require_tree .

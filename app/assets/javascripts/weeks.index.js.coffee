@@ -1,5 +1,9 @@
+ready = ->
+    console.log 'weeks#index'
+    loadModal()
+
 loadModal = ->
-    console.log 'loadModal'
+    console.log 'modal'
     $("#refresh-data").click(->
         $(".loading-modal").modal(
             keyboard: false
@@ -15,6 +19,6 @@ loadModal = ->
     )
 
 # on refresh
-$(document).ready(loadModal)
+$(".weeks.index").ready(ready)
 # on turbolinks load
-$(document).on('page:load', loadModal)
+$(".weeks.index").on('page:load', loadModal)

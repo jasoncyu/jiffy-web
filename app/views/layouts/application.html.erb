@@ -4,10 +4,12 @@
   <title>JiffyAnalysisRails</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "#{params[:controller]}" %>
+  <%= javascript_include_tag "#{params[:controller]}.#{params[:action]}" %>
   <%= csrf_meta_tags %>
   <%= yield(:head) %>
 </head>
-<body data-controller="<%= controller.controller_name %>" data-action="<%= controller.action_name %>" >
+<body class="<%= controller.controller_name %> <%= controller.action_name %>" >
   <%= include_gon %>
   <%= render 'layouts/nav' %>
 

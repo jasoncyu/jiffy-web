@@ -22,6 +22,6 @@ ready = ->
             ]
 
 # on refresh
-$(document).ready(ready)
+$(".weeks.show").ready(ready)
 # on turbolinks load
-$(document).on('page:load', ready)
+$(".weeks.show").on('page:load', ready)
