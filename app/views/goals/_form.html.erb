@@ -11,13 +11,32 @@
     </div>
   <% end %>
   
-  <%= select_tag(:goal_owner, options_for_select([["Task", "task"], ["Project", "project"]]), id: 'goal_owner') %>
-  <%= select_tag(:project_id, options_for_select(@projects.map {|project| [project.name, project.id]}), id: 'project') %>
-  <%= select_tag(:task_id, options_for_select(@tasks.map {|task| [task.name, task.id]}), id: 'task') %>
+<form action="" role="form">
+  <div class="form-group">
+    <label for="goal_type">Is your goal for a Project or a Task?</label>
+    <%= select_tag(:goal_owner, options_for_select([["Task", Goal::TASK_TYPE], ["Project", Goal::PROJECT_TYPE]]), id: 'goal_owner') %>
+  </div>
 
-  <%= select_tag(:goal_type, options_for_select([['Negative', -1], ['Positive', 1]])) %>
-  <%= text_field :goal, :amount %>
+  <div class="form-group">
+    <label for="project">Project</label>
+    <%= select_tag(:project, options_for_select(Project.all.map{|p| [p.name, p.id]}), class: 'projectSelect') %>
+  <div class="form-group" id="taskSelect">
+    <label for="task">Task</label>
+    <select name="" id="taskOptions"></select>
+  </div>
+  
+  <div class="form-group">
+    <label for="task">Positive goals mean you want to do more of them, negative goals less</label>
+    <%= select_tag(:goal_type, options_for_select([['Negative', -1], ['Positive', 1]])) %>
+  </div>
+
+  <div class="form-group">
+    <label for="amount">How many hours in this goal?</label>
+    <%= text_field :goal, :amount %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+  </div>
+</form>
 <% end %>

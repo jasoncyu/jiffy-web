@@ -4,6 +4,13 @@ JiffyAnalysisRails::Application.routes.draw do
       get 'relink'
     end
   end
+
+  resources :projects do
+    member do
+      get 'tasks'
+    end
+  end
+  
   resources :weeks do
     resources :entries
   end

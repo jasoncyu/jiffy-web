@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="span6">
         <h3>Goals</h3>
         <% @goals.each do |goal| %>
             <div class="goal">
@@ -10,7 +10,7 @@
         <% end %>
     </div>
     
-    <div class="col-md-6">
+    <div class="span6">
         <h3>Project/tasks</h3>
         <!-- Highlight with goal in green, without in red -->
         <% @projects.each do |project| %>
@@ -22,7 +22,7 @@
             </div>
             <% project.tasks.each do |task| %>
                 <div class="trackable">
-                    <%= task.name %>
+                    > <%= task.name %>
                     <% if task.goal %>
                         <%= task.goal.owner_name %>
                     <% end %>
@@ -31,3 +31,4 @@
         <% end %>
     </div>
 </div>
+
