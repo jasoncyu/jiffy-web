@@ -13,14 +13,20 @@ refreshChart = (project_names) ->
 
     drawChart(week_start_days, series)        
 
-goToWeek = (start_day) ->
+goToWeek = (start_day, project_name) ->
     weekId = null
     gon.weeks.forEach((elem, index, array) ->
       if elem.start_day == start_day
         weekId = elem.id
     )
 
-    document.location.href = "#{document.location.origin}/weeks/#{weekId}"
+    projectId = null
+    gon.projects.forEach((elem, index, array) ->
+        if elem.name == project_name
+            projectId = elem.id
+    )
+
+    document.location.href = "#{document.location.origin}/weeks/#{weekId}/entries/filter_by_project/#{projectId}"
 
 drawChart = (week_start_days, series) ->
     # use project ids to generate each line series
@@ -43,7 +49,8 @@ drawChart = (week_start_days, series) ->
                     events:
                         click: ->
                             index = this.series.data.indexOf this
-                            goToWeek this.category
+                            project_name = this.series.name
+                            goToWeek this.category, project_name
 
 
 

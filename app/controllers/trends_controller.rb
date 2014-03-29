@@ -4,5 +4,6 @@ class TrendsController < ApplicationController
     @weeks = Week.all
 
     gon.jbuilder "app/views/weeks/index.json", as: "weeks"
+    gon.jbuilder "app/views/projects/index.json", as: "projects"
   end
 end

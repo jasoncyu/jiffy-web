@@ -1,0 +1,29 @@
+<h1>Listing entries</h1>
+<% @date_entries.each do |day, data| %>
+  <h5><%= "#{Date::DAYNAMES[day.wday]}, #{day.strftime(@date_format)}" %></h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Start</th>
+      <th>Stop</th>
+      <th>Duration</th>
+      <th>Project</th>
+      <th>Task</th>
+      <th>Note</th>
+    </tr>
+  </thead>
+
+  <tbody class="table-striped table-hover">
+      <% data.each do |entry| %>
+        <tr>
+          <td><%= entry.pretty :start_time %></td>
+          <td><%= entry.pretty :stop_time %></td>
+          <td><%= '%.1f' % entry.duration %></td>
+          <td><%= entry.project ? link_to(entry.project.name, "entries/filter_by_project/#{entry.project.id}") : "" %></td>
+          <td><%= entry.task ? entry.task.name : "" %></td>
+          <td><%= entry.note %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

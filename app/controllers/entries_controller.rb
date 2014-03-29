@@ -9,9 +9,24 @@ class EntriesController < ApplicationController
     @entries = Entry.all
     if params[:week_id]
       week = Week.find(params[:week_id])
-      @data_by_day = week.entries.group_by {|e| e.start_time.to_date}
+      date_entries = week.entries.group_by {|e| e.start_time.to_date}
+      @date_entries = Hash[date_entries.map{|date, entries| [date, entries]}.sort_by(&:first)]
     end
 
+    @date_format = "%m-%d-%Y"
+  end
+
+  def filter_by_project
+    week = Week.find params[:week_id].to_i
+    @week_id = params[:week_id]
+    @project_id = params[:project_id]
+    if params[:project_id]
+      @entries = week.entries.where project_id: params[:project_id].to_i
+      date_entries = @entries.group_by {|e| e.start_time.to_date}
+      @date_entries = Hash[date_entries.map{|date, entries| [date, entries]}.sort_by(&:first)]
+    else
+      debug "Error"
+    end
     @date_format = "%m-%d-%Y"
   end
 
