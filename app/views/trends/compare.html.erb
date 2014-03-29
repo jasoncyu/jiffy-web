@@ -1,0 +1,14 @@
+<%= include_gon %>
+<% @projects.each do |p| %>
+<div class='trackable' data-project-name="<%= p.name %>">
+    <%= p.name %>
+    <% p.tasks.each do |t| %>
+        <div data-task-id=<%= t.id %>> > <%= t.name %></div>
+    <% end %>
+</div>
+
+<div id="compareProjectsChart">
+    
+</div>
+
+<% end %>

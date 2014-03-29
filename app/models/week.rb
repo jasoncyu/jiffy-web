@@ -56,7 +56,7 @@ class Week < ActiveRecord::Base
     end
   end
 
-  # array of mondays that are covered by the entries
+  # array of dates (mondays) that are covered by the entries
   def self.mondays
     entries = Entry.all.order('start_time ASC')
     first_monday = entries.find {|entry| entry.start_time.to_date.monday?}.start_time.to_date
