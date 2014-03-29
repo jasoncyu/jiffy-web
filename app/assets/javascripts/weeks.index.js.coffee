@@ -17,8 +17,5 @@ loadModal = ->
             $(".modal-body").text("Please wait...")
         )
     )
-
-# on refresh
+    
 $(".weeks.index").ready(ready)
-# on turbolinks load
-$(".weeks.index").on('page:load', loadModal)

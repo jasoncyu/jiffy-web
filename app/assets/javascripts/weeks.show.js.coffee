@@ -3,7 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 ready = ->
-    console.log "page:load"
     $("#projectBarChart").highcharts
         chart: 
             type: 'bar'
@@ -21,7 +20,4 @@ ready = ->
                 {name: 'Negative', data: gon.neg_goal_data}
             ]
 
-# on refresh
 $(".weeks.show").ready(ready)
-# on turbolinks load
-$(".weeks.show").on('page:load', ready)
