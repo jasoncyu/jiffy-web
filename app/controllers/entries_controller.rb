@@ -10,7 +10,7 @@ class EntriesController < ApplicationController
     if params[:week_id]
       week = Week.find(params[:week_id])
       date_entries = week.entries.group_by {|e| e.start_time.to_date}
-      @date_entries = Hash[date_entries.map{|date, entries| [date, entries]}.sort_by(&:first)]
+      @date_entries = Hash[date_entries.map{|date, entries| [date, entries.sort_by(&:start_time)]}.sort_by(&:first)]
     end
 
     @date_format = "%m-%d-%Y"
