@@ -1,5 +1,5 @@
 class Week < ActiveRecord::Base
-  has_many :entries
+  has_and_belongs_to_many :entries
   validates :start_day, uniqueness: true, presence: true
 
   # hash of {date => entries}
@@ -49,9 +49,15 @@ class Week < ActiveRecord::Base
   def self.create_weeks
     entries = Entry.all.order('start_time ASC')
     self.mondays.each do |monday|
-      entries = Entry.where("start_time > ? AND stop_time < ?", monday, monday + 7.days)
+      next_monday = monday + 7.days 
+      last_monday = monday - 7.days
+      entries = Entry.where("(start_time >= ? AND start_time <= ?) OR (start_time >= ? AND stop_time >= ? and stop_time < ?)", monday, next_monday, last_monday, monday, next_monday)
+      # entries = Entry.where("(start_time >= ? AND start_time <= ?)", monday, next_monday)
+
       w = Week.find_or_create_by(start_day: monday)
       w.entries = entries
+      # entries.each {|entry| entry.weeks.length == 0 ? entry.weeks = [w] : (entry.weeks << w)}
+
       w.save
     end
   end

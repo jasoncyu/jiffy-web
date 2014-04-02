@@ -3,6 +3,7 @@ class CreateEntries < ActiveRecord::Migration
     create_table :entries do |t|
       t.integer :project_id
       t.integer :task_id
+      t.integer :week_id
       t.datetime :start_time
       t.datetime :stop_time
       t.integer :hours
