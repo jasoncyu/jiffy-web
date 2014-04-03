@@ -6,12 +6,15 @@ class Entry < ActiveRecord::Base
 
   validates :start_time, uniqueness: true, presence: true
   validates :stop_time, uniqueness: true, presence: true
+  validates :hours, presence: true
+  validates :minutes, presence: true
+
   belongs_to :project
   belongs_to :task
   has_and_belongs_to_many :weeks
-  dir_name = '/Users/yujason2/Dropbox/Apps/JiffyBackup/2013.csv'
 
   # attr_accessor :start_time, :stop_time, :task_id, :project_id, :hours, :minutes, :note
+
   def duration
     hours + minutes.to_f/60
   end
@@ -19,6 +22,47 @@ class Entry < ActiveRecord::Base
   # pretty prints either start time or stop time
   def pretty(key)
     self.send(key.to_sym).strftime("%m-%d-%Y %k:%M")
+  end
+
+  # entry starts on one day and ends on another
+  def spans_two_days?
+    self.start_time.to_date != self.stop_time.to_date
+  end
+
+  #if spans_two_days?, then returns [duration_today, duration_tomorrow]
+  def split_duration
+    # tomorrow at 00:00
+    tomorrow = self.tomorrow
+    duration_today = (tomorrow - self.start_time).to_f / 3600
+    duration_tomorrow = (self.stop_time - tomorrow).to_f / 3600
+
+    [duration_today, duration_tomorrow]
+  end
+
+  def starts_in_week?(week)
+    (week.start_day <= self.start_time) and (self.start_time <= week.start_day + 7.days)
+  end
+
+  # returns the amount of time that an entry spent in the given week.
+  def duration_for_week(week)
+    return duration unless spans_two_days?
+
+    ret = 0
+    if week.contains_day?(self.start_time.to_date)
+      ret += self.split_duration[0]
+    end
+
+    if week.contains_day?(self.stop_time.to_date)
+      ret += self.split_duration[1]
+    end
+
+    return ret
+  end
+
+  # returns the next day at midnight
+  def tomorrow
+    tomorrow = (self.start_time + 1.day)
+    Time.utc(tomorrow.year, tomorrow.month, tomorrow.day)
   end
 
   #returns duplicates if there are any, else empty

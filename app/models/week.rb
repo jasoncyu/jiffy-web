@@ -15,7 +15,7 @@ class Week < ActiveRecord::Base
 
     entries.each do |entry|
       project = entry.project
-      h[project.name] += entry.duration
+      h[project.name] += entry.duration_for_week(self)
     end
 
     # Round to nearest hundredth
@@ -25,6 +25,7 @@ class Week < ActiveRecord::Base
 
     return h
   end
+
 
   def projects
     entries.map(&:project).uniq
@@ -44,6 +45,11 @@ class Week < ActiveRecord::Base
     end
 
     return h
+  end
+
+  # true if the day passed is in this week
+  def contains_day?(day)
+    (self.start_day <= day) and (day < self.start_day + 7.days)
   end
 
   def self.create_weeks
