@@ -28,7 +28,10 @@ describe Entry do
     before(:each) do 
       @week = Week.new(start_day: Date.new(2014,3,24))
       @next_week = Week.new(start_day: @week.start_day + 7.days)
+<<<<<<< HEAD
       @one_day_entry = Entry.new(start_time: Time.utc(2014,3,24,9), stop_time: Time.utc(2014,3,24,10), hours: 1, minutes: 0)
+=======
+>>>>>>> 193827b8471f39a104874209855a4b197e0b5a4b
       start_time = Time.utc(2014,3,24,17,30)
       stop_time = Time.utc(2014,3,25,2,30)
       @split_entry = Entry.new(start_time: start_time, stop_time: stop_time, hours: 9)
