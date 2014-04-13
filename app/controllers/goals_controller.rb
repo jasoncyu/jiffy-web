@@ -26,19 +26,25 @@ class GoalsController < ApplicationController
   # POST /goals
   # POST /goals.json
   def create
-    logger.debug "params: #{params.inspect}"
+
     if params[:goal_owner] == "project"
       @goal = ProjectGoal.new
       @goal.amount = params[:goal][:amount].to_i
       @goal.goal_type = params[:goal_type].to_i
       project = Project.find(params[:project_id])
       project.goal = @goal
+
+      project.owner_type = Goal::PROJECT_TYPE
+      project.owner_name = project.name
     else
       @goal = TaskGoal.new
       @goal.amount = params[:goal][:amount].to_i
       @goal.goal_type = params[:goal_type].to_i
       task = Task.find(params[:task_id])
       task.goal = @goal 
+
+      project.owner_type = Goal::TASK_TYPE
+      project.owner_name = task.name
     end
 
 
