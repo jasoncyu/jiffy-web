@@ -22,11 +22,11 @@ class WeeksController < ApplicationController
   end
 
   def delete_current_data!
-    Task.all.destroy_all
-    Entry.all.destroy_all
-    Project.all.destroy_all
-    # Week.all.destroy_all
-    # Goal.all.destroy_all
+    Task.destroy_all
+    Entry.destroy_all
+    Project.destroy_all
+    # Week.destroy_all
+    # Goal.destroy_all
   end
 
 end

@@ -28,7 +28,7 @@ class GoalsController < ApplicationController
   def create
     logger.debug "params: #{params.inspect}"
     @goal = Goal.new
-    if params[:goal_owner] == "project"
+    if params[:goal_owner].to_i == 0
       @goal.goal_type = Goal::PROJECT_TYPE
       owner = Project.find(params[:project_id])
     else

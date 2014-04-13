@@ -12,8 +12,8 @@ var ready = function(){
         }
     });
 
-    var getTasksForProjectId = function(project_id) {
-        var tasks = new Array();
+    var getTasksForProjectId = function(project_id, callback) {
+        var tasks = Array();
 
         url = document.location.origin + "/projects/" + project_id + "/tasks.json";
         $.ajax({
@@ -21,33 +21,40 @@ var ready = function(){
             dataType: 'json'
         })
         .done(function(innerTasks) {
-            innerTasks.each(function(i, task) {
+            // console.log(innerTasks);
+            innerTasks.forEach(function(task, index) {
                 tasks.push(task);
             });
+
+            callback(tasks);
         })
         .fail(function() {
             console.log("error");
         })
         .always(function() {
         });
-
-        return tasks;
     };
 
     // Display the tasks of the selected project
     $('.projectSelect').change(function() {
-        $options = $('#taskOptions');
-
         project_id = $('.projectSelect option:selected').val();
 
-        var tasks = getTasksForProjectId();
-        $.each(tasks, function(i, task) {
-            var option = new Option(task.name, task.id);
-            $options.push(option);
-        });
+        var updateTasks = function (tasks) {
+            $("#taskOptions").empty();
+            $.each(tasks, function(i, task) {
+                console.log(task);
+                $("<option></option>")
+                    .attr("value", task.id)
+                    .text(task.name)
+                    .appendTo('#taskOptions')
+            });
+        }
+
+        getTasksForProjectId(project_id, updateTasks)
     });
 
-    $('#goal_owner').change()
+    $('#goal_owner').trigger('change');
+    $('.projectSelect').trigger('change');
 };
 
 $(document).ready(ready)
