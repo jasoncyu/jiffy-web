@@ -29,16 +29,17 @@ class GoalsController < ApplicationController
     logger.debug "params: #{params.inspect}"
     @goal = Goal.new
     if params[:goal_owner].to_i == 0
-      @goal.goal_type = Goal::PROJECT_TYPE
       owner = Project.find(params[:project_id])
+      @goal.owner_type = Goal::PROJECT_TYPE
     else
-      @goal.goal_type = Goal::TASK_TYPE
       owner = Task.find(params[:task_id])
+      @goal.owner_type = Goal::TASK_TYPE
     end
 
-    @goal.amount = params[:goal][:amount].to_i
-    owner.goal = @goal 
     @goal.owner_name = owner.name
+    @goal.goal_type = params[:goal_type].to_i
+    @goal.amount = params[:goal][:amount].to_i
+    owner.goal = @goal
 
     respond_to do |format|
       if @goal.save

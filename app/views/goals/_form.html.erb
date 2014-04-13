@@ -19,7 +19,7 @@
 
   <div class="form-group">
     <label for="project">Project</label>
-    <%= select_tag(:project, options_for_select(Project.all.map{|p| [p.name, p.id]}), class: 'projectSelect') %>
+    <%= select_tag(:project_id, options_for_select(Project.all.map{|p| [p.name, p.id]}), class: 'projectSelect') %>
   <div class="form-group" id="taskSelect">
     <label for="task">Task</label>
     <select name="" id="taskOptions"></select>
