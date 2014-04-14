@@ -16,6 +16,7 @@ class WeeksController < ApplicationController
   def refresh_all_data
     delete_current_data!
     Entry.read_new_data
+    Goal.relink_goals
 
     # redirect_to weeks_path, notice: "Data updated"
     render nothing: true

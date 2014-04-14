@@ -19,5 +19,23 @@ class Goal < ActiveRecord::Base
     self.goal_type < 0
   end
 
-  
+
+  def self.relink_goals
+    owner = nil
+
+    Goal.all.each do |goal|
+      if goal.owner_type == Goal::PROJECT_TYPE
+        owner = Project.find_by name: goal.owner_name
+      elsif goal.owner_type == Goal::TASK_TYPE
+        owner = Task.find_by name: goal.owner_name
+      end
+
+      if !owner
+        logger.debug "Old project/task not found"
+      else
+        owner.goal = goal
+      end
+     end
+
+  end
 end
