@@ -40,13 +40,13 @@ var ready = function(){
         project_id = $('.projectSelect option:selected').val();
 
         var updateTasks = function (tasks) {
-            $("#taskOptions").empty();
+            $("#task_id").empty();
             $.each(tasks, function(i, task) {
                 console.log(task);
                 $("<option></option>")
                     .attr("value", task.id)
                     .text(task.name)
-                    .appendTo('#taskOptions')
+                    .appendTo('#task_id');
             });
         }
 
