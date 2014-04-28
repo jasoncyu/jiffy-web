@@ -11,16 +11,19 @@ class Week < ActiveRecord::Base
   # calculates a list of hashes with {project_name: duration} for this week's entries
   def project_data
     # hash of project_name to hours spent
-    h = Hash.new 0
+    h = Hash.new {}
 
     entries.each do |entry|
       project = entry.project
-      h[project.name] += entry.duration_for_week(self)
+      h[project.id] ||= {"hours" => 0}
+      h[project.id]["hours"] += entry.duration_for_week(self)
+      h[project.id]["name"] = project.name
     end
 
     # Round to nearest hundredth
-    h.each do |name, hours|
-      h[name] = hours.round(2)
+    h.each do |id, proj_hash|
+      logger.debug "Hash[id]: #{h[id]}"
+      h[id]["hours"] = h[id]["hours"].round(2)
     end
 
     return h

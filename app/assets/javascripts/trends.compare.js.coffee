@@ -1,8 +1,8 @@
-refreshChart = (project_names) ->
+refreshChart = (project_ids) ->
     # console.log "project_names: #{project_names}"
-    series = $.map project_names, (name, index) ->
+    series = $.map project_ids, (id, index) ->
         data_for_project = $.map(gon.weeks, (week, index) ->
-            hours = week.project_data[name]
+            hours = week.project_data[id]["hours"]
             return 0 if hours == undefined
             return hours
         )
@@ -57,11 +57,11 @@ drawChart = (week_start_days, series) ->
 ready = ->
     $(".trackable").on 'click', () ->
       $(this).toggleClass("selected")
-      project_names = $('.selected').map((index, elem) ->
-        $(elem).data "project-name" 
+      project_ids = $('.selected').map((index, elem) ->
+        $(elem).data "project-id" 
       )
 
-      refreshChart project_names
+      refreshChart project_ids
 
     # prevent double click from highlighting text
     $(".trackable").mousedown -> 

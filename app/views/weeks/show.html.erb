@@ -1,7 +1,21 @@
 <%= include_gon %>
 <h3><%= @week.start_day %></h3>
 <h4><%= link_to 'Entries', week_entries_path(@week.id) %></h4>
-<%= pie_chart @week.project_data %>
+<%= pie_chart Hash[@week.project_data.map{|id,proj_hash| [proj_hash["name"], proj_hash["hours"]]}]%>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Number of Hours</td>
+        </tr>
+    </thead>
+    <% @week.project_data.each do |id, proj_hash| %>
+        <tr>
+        <td><%= link_to proj_hash["name"], project_path(id) %></td>
+        <td><%= proj_hash["hours"] %></td>
+        </tr>
+    <% end %>
+</table>
 <%= column_chart @week.task_data %>
 
 <h3>Goals</h3>

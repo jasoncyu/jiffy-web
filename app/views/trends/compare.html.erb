@@ -1,6 +1,6 @@
 <%= include_gon %>
 <% @projects.each do |p| %>
-<div class='trackable' data-project-name="<%= p.name %>">
+<div class='trackable' data-project-id="<%= p.id %>">
     <%= p.name %>
     <% p.tasks.each do |t| %>
         <div data-task-id=<%= t.id %>> > <%= t.name %></div>

@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
 <h3><%= @project.name %></h3>
-<%= line_chart Hash[@weeks.map{|week| [week.start_day, week.project_data[@project.name]]}] %>
+<%= line_chart Hash[@weeks.map{|week| [week.start_day, week.project_data[@project.id]["hours"]]}] %>
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
