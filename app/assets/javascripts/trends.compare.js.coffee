@@ -2,7 +2,7 @@ refreshChart = (project_ids) ->
     # console.log "project_names: #{project_names}"
     series = $.map project_ids, (id, index) ->
         data_for_project = $.map(gon.weeks, (week, index) ->
-            hours = week.project_data[id]["hours"]
+            hours = week.project_data?[id.toString()]?["hours"] ? 0
             return 0 if hours == undefined
             return hours
         )
