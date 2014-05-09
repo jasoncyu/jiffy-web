@@ -1,11 +1,17 @@
 refreshChart = (project_ids) ->
-    # console.log "project_names: #{project_names}"
+    # series is a list of hashes with key project name and a list of hours values ordered by date
     series = $.map project_ids, (id, index) ->
+        name = null
+        for project in gon.projects
+            if project.id == id
+                name = project.name
+
         data_for_project = $.map(gon.weeks, (week, index) ->
             hours = week.project_data?[id.toString()]?["hours"] ? 0
             return 0 if hours == undefined
             return hours
         )
+        console.log "name: ", name
         return {name: name, data: data_for_project}
 
     week_start_days = gon.weeks.map (elem) ->
@@ -14,6 +20,7 @@ refreshChart = (project_ids) ->
     drawChart(week_start_days, series)        
 
 goToWeek = (start_day, project_name) ->
+    console.log "project_name: #{project_name}"
     weekId = null
     gon.weeks.forEach((elem, index, array) ->
       if elem.start_day == start_day
@@ -28,7 +35,7 @@ goToWeek = (start_day, project_name) ->
 
     document.location.href = "#{document.location.origin}/weeks/#{weekId}/entries/filter_by_project/#{projectId}"
 
-drawChart = (week_start_days, series) ->
+drawChart = (week_start_days, name_project_data) ->
     # use project ids to generate each line series
     chart = new Highcharts.Chart
         chart:
@@ -40,7 +47,7 @@ drawChart = (week_start_days, series) ->
             categories: week_start_days
         yAxis:
             title: "Time Spent (hours)"
-        series: series
+        series: name_project_data
         plotOptions:
             series:
                 allowPointSelect: true
@@ -48,7 +55,6 @@ drawChart = (week_start_days, series) ->
                 point:
                     events:
                         click: ->
-                            index = this.series.data.indexOf this
                             project_name = this.series.name
                             goToWeek this.category, project_name
 
