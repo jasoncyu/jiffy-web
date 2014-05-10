@@ -18,4 +18,5 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require jquery-readyselector
+//= require underscore
 //= require_tree .

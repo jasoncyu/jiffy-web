@@ -21,17 +21,14 @@ refreshChart = (project_ids) ->
 
 goToWeek = (start_day, project_name) ->
     console.log "project_name: #{project_name}"
-    weekId = null
-    gon.weeks.forEach((elem, index, array) ->
-      if elem.start_day == start_day
-        weekId = elem.id
-    )
 
-    projectId = null
-    gon.projects.forEach((elem, index, array) ->
-        if elem.name == project_name
-            projectId = elem.id
-    )
+    weekId = _.find gon.weeks, (week) ->
+        return week.start_day == start_day
+    .id
+
+    projectId = _.find gon.projects, (project) ->
+        project.name == project_name
+    .id
 
     document.location.href = "#{document.location.origin}/weeks/#{weekId}/entries/filter_by_project/#{projectId}"
 
