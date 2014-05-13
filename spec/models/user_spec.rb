@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "uploads report" do
+    it "should make report property accessible" do
+    end
+  end
 end
