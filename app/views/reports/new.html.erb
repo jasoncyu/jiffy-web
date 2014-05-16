@@ -7,8 +7,27 @@
 .fail {background-color: red; }
 </style>
 
-<div id="holder"></div> 
+<%= form_for(@report) do |f| %>
+  <% if @report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@report.errors.count, "error") %> prohibited this entry from being saved:</h2>
+
+      <ul>
+      <% @entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div id="holder"></div> 
   <p id="status">File API & FileReader API not supported</p>
   <p>Drag an image from your desktop on to the drop zone above to see the browser read the contents of the file and use it as the background - without uploading the file to any servers.</p>
-</article>
+
+<div class="actions">
+  <%= f.text_field :name %>
+  <%= f.submit  {id:"submit-report"} %>
+</div>
+
+<% end %>
 
