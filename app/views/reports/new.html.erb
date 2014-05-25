@@ -1,0 +1,9 @@
+<%= form_for @report, html: {class: "form-horizontal", role: :form, multipart: true} do |f| %>
+  <div class="control-group">
+    <label class="control-label" for="jiffy_summary">File input</label>
+    <div class="controls">
+      <%= f.file_field :jiffy_summary %>
+    </div>
+  </div>
+  <%= f.submit class: "btn btn-default btn-block" %>
+<% end %>

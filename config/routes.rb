@@ -19,11 +19,14 @@ JiffyAnalysisRails::Application.routes.draw do
     end
   end
 
+  resources :reports do
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'weeks#index'
+  root 'reports#new'
 
   post 'weeks/update_data' => 'weeks#update_data'
   post 'weeks/refresh_all_data' => 'weeks#refresh_all_data'
