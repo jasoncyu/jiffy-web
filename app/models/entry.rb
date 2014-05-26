@@ -70,10 +70,10 @@ class Entry < ActiveRecord::Base
     Entry.all.select {|e| !e.valid?}
   end
 
-  def self.read_new_data
+  def self.read_new_data(jiffy_summary_path)
     # self.column_names = "Customer,Project,Task,Start time,Stop time,Minutes,Note".split(',')
     column_names_row = true
-    CSV.foreach(ApplicationHelper::JIFFY_CSV_PATH) do |row|
+    CSV.foreach(jiffy_summary_path) do |row|
       # First row has column names
       if column_names_row
         column_names_row = false

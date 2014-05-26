@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class ReportUploader < CarrierWave::Uploader::Base
+class JiffySummaryUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
